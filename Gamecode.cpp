@@ -29,6 +29,13 @@ struct Character {
     }
 };
 
+
+
+    void levelUp()
+    {
+        
+    }
+
 int main() {
     Character hero1("Arthur", 12, 12, 7, 5, 3, 1, WARRIOR);
     Character hero2("Merlin",6, 4, 6, 15, 10, 1, MAGE);
