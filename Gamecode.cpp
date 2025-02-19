@@ -31,10 +31,12 @@ struct Character {
 int main() {
     Character hero1("Arthur", 12, 7, 5, 3, 1, WARRIOR);
     Character hero2("Merlin", 4, 6, 15, 10, 1, MAGE);
-    Character hero3("Jarvis", )
-
+    Character hero3("Jarvis",4,10,17,20,1,PALADIN );
+    Character hero4("Robin", 10, 15, 8,6,1,ASSASIN);
     hero1.printClass();
     hero2.printClass();
+    hero3.printClass();
+    hero4.printClass();
 
     return 0;
 }
