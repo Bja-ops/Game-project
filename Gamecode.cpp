@@ -64,6 +64,17 @@ public:
     ClassType class_type;
 };
 
+
+    enum{BOW, SHIELD, WAND, SWORD, GRATE_SWORD, DAGGER};
+
+
+    class WeaponTypes
+    {
+    private:
+        int
+    };
+
+
 int main()
 {
     cout << "What character do you choose?" << endl;
