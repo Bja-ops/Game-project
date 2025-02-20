@@ -29,14 +29,14 @@ struct Character {
     }
 };
 
-
-
     void levelUp()
     {
 
     }
 
-int main() {
+int main()
+{
+        cout << "What character do you choose ?" << endl;
     Character hero1("Arthur", 12, 12, 7, 5, 3, 1, WARRIOR);
     Character hero2("Merlin",6, 4, 6, 15, 10, 1, MAGE);
     Character hero3("Jarvis",8,4,10,17,20,1,PALADIN );
@@ -45,6 +45,7 @@ int main() {
     hero2.printClass();
     hero3.printClass();
     hero4.printClass();
+    unsigned long int exp = 1000;
 
     return 0;
 }
