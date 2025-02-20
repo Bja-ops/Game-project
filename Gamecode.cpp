@@ -33,7 +33,7 @@ struct Character {
 
     void levelUp()
     {
-        
+
     }
 
 int main() {
