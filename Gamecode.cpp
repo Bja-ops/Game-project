@@ -65,14 +65,31 @@ public:
 };
 
 
-    enum{BOW, SHIELD, WAND, SWORD, GRATE_SWORD, DAGGER};
+    enum WeaponType{BOW, SHIELD, WAND, SWORD, GRATE_SWORD, DAGGER, CLUB, AXE};
 
-
-    class WeaponTypes
+    class Weapon
     {
     private:
-        int
+        string name;
+        int phisycal_damage;
+        int magic_damage;
+        int fire_damage;
+        int bleeding_damage;
+        int ligthning_damage;
+        int poison_damage;
+        int critical_damage;
+        int ice_damage;
+    public:
+        Weapon(string n, WeaponType t, int ph_dmg, int mag_dmg, int f_dmg, int bl_dmg, int li_dmg, int poi_dmg, int cr_dmg, int ic_dmg)
+            : name(n), phisycal_damage(ph_dmg), magic_damage(mag_dmg), fire_damage(f_dmg), bleeding_damage(bl_dmg), ligthning_damage(li_dmg), poison_damage(poi_dmg), critical_damage(cr_dmg), ice_damage(ic_dmg) {}
+
+        void displayWeapon()
+        {
+            
+        }
+
     };
+
 
 
 int main()
