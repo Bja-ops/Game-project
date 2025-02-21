@@ -144,7 +144,7 @@ int main()
     Weapon wand("Elder Wand", WAND, 5, 40, 0, 0, 0, 0, 5, 10);
     Weapon axe("Battle Axe", AXE, 50, 0, 0, 5, 0, 0, 15, 0);
     Weapon dagger("Shadow Dagger", DAGGER, 25, 5, 0, 10, 0, 0, 20, 0);
-
+    
     hero1.equipWeapon(&sword);
     hero2.equipWeapon(&wand);
     hero3.equipWeapon(&axe);
