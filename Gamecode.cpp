@@ -5,6 +5,8 @@ enum ClassType { WARRIOR, MAGE, PALADIN, ASSASIN};
 
 enum WeaponType { BOW, SHIELD, WAND, SWORD, GRATE_SWORD, DAGGER, CLUB, AXE };
 
+enum ArmorType {LEATHER, IRON, OBSIDIAN, SHADOW, CHAIN_MAIL, PLATE};
+
 class Weapon {
 public:
     string name;
@@ -102,7 +104,19 @@ public:
 
     class Armor
     {
-        
+    public:
+        string char_name;
+        int physical_resistance;
+        int magic_resistance;
+        int fire_resistance;
+        int bleeding_resistance;
+        int ligthning_resistance;
+        int poison_resistance;
+        int ice_resistance;
+        ArmorType type;
+
+        Armor(string name, int pr, int mr, int fr, int br, int lr, int por, int ir)
+            : char_name(name), physical_resistance(pr), magic_resistance(mr), fire_resistance(fr), bleeding_resistance(br), ligthning_resistance(lr), poison_resistance(por), ice_resistance(por){}
     };
 
 int main()
