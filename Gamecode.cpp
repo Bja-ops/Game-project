@@ -33,14 +33,14 @@ public:
         case CLUB: cout << "Club "; break;
         case AXE: cout << "Axe "; break;
         }
-        cout << " | Physical damage: " << phisycal_damage << "\n"
-             << " | Magic damage: " << magic_damage << "\n"
-             << " | Fire damage: " << fire_damage << "\n"
-             << " | Bleeding damage: " << bleeding_damage << "\n"
-             << " | Lightning damage: " << ligthning_damage << "\n"
-             << " | Poison damage: " << poison_damage << "\n"
-             << " | Critical damage: " << critical_damage << "\n"
-             << " | Ice damage: " << ice_damage << "\n";
+        cout << " | Physical damage: " << phisycal_damage << "\n";
+        cout << " | Magic damage: " << magic_damage << "\n";
+        cout << " | Fire damage: " << fire_damage << "\n";
+        cout << " | Bleeding damage: " << bleeding_damage << "\n";
+        cout << " | Lightning damage: " << ligthning_damage << "\n";
+        cout << " | Poison damage: " << poison_damage << "\n";
+        cout << " | Critical damage: " << critical_damage << "\n";
+        cout << " | Ice damage: " << ice_damage << "\n";
     }
 };
 
@@ -98,17 +98,17 @@ int main() {
     Character hero2("Merlin",6, 4, 6, 15, 10, 1, MAGE);
     Character hero3("Jarvis",8,4,10,17,20,1,PALADIN );
     Character hero4("Robin", 10,10, 15, 8,6,1,ASSASIN);
-    
+
     Weapon sword("Excalibur", SWORD, 30, 0, 0, 0, 0, 0, 10, 0);
     Weapon wand("Elder Wand", WAND, 5, 40, 0, 0, 0, 0, 5, 10);
     Weapon axe("Battle Axe", AXE, 50, 0, 0, 5, 0, 0, 15, 0);
     Weapon dagger("Shadow Dagger", DAGGER, 25, 5, 0, 10, 0, 0, 20, 0);
-    
+
     hero1.equipWeapon(&sword);
     hero2.equipWeapon(&wand);
     hero3.equipWeapon(&axe);
     hero4.equipWeapon(&dagger);
-    
+
     hero1.displayCharacter();
     hero2.displayCharacter();
     hero3.displayCharacter();
