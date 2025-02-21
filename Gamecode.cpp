@@ -58,7 +58,8 @@ public:
     Character(string name, int hp, int str, int dex, int intel, int fai, int lvl, ClassType c_type)
         : char_name(name), health(hp), strength(str), dexterity(dex), intelligence(intel), faith(fai), level(lvl), class_type(c_type), experience(0), experienceToNextLevel(100), equippedWeapon(nullptr) {}
 
-    void equipWeapon(Weapon* weapon) {
+    void equipWeapon(Weapon* weapon)
+    {
         equippedWeapon = weapon;
         cout << char_name << " equipped " << weapon->name << "! " << endl;
     }
@@ -69,8 +70,10 @@ public:
         checkLevelUp();
     }
 
-    void checkLevelUp() {
-        while (experience >= experienceToNextLevel) {
+    void checkLevelUp()
+    {
+        while (experience >= experienceToNextLevel)
+        {
             experience -= experienceToNextLevel;
             level++;
             experienceToNextLevel += 150;
@@ -78,21 +81,26 @@ public:
         }
     }
 
-    void displayStats() const {
+    void displayStats() const
+    {
         cout << "Level: " << level << " | XP: " << experience << "/" << experienceToNextLevel << "\n";
     }
 
-    void displayCharacter() {
+    void displayCharacter()
+    {
         cout << "Character: " << char_name << " | Level: " << level << endl;
-        if (equippedWeapon) {
+        if (equippedWeapon)
+        {
             equippedWeapon->displayWeapon();
-        } else {
+        } else
+        {
             cout << "No weapon equipped! " << endl;
         }
     }
 };
 
-int main() {
+int main()
+{
     cout << "What character do you choose?" << endl;
     Character hero1("Arthur", 12, 12, 7, 5, 3, 1, WARRIOR);
     Character hero2("Merlin",6, 4, 6, 15, 10, 1, MAGE);
