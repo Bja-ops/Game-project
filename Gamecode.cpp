@@ -69,7 +69,7 @@ public:
 
     class Weapon
     {
-    private:
+    public:
         string name;
         int phisycal_damage;
         int magic_damage;
@@ -79,13 +79,32 @@ public:
         int poison_damage;
         int critical_damage;
         int ice_damage;
-    public:
+        WeaponType type;
         Weapon(string n, WeaponType t, int ph_dmg, int mag_dmg, int f_dmg, int bl_dmg, int li_dmg, int poi_dmg, int cr_dmg, int ic_dmg)
             : name(n), phisycal_damage(ph_dmg), magic_damage(mag_dmg), fire_damage(f_dmg), bleeding_damage(bl_dmg), ligthning_damage(li_dmg), poison_damage(poi_dmg), critical_damage(cr_dmg), ice_damage(ic_dmg) {}
 
         void displayWeapon()
         {
-            
+            cout << "Weapon: " << name << "|Type: ";
+            switch (type)
+            {
+            case BOW: cout << "Bow "; break;
+            case SHIELD: cout << "Shield "; break;
+            case WAND: cout << "Wand "; break;
+            case SWORD: cout << "Sword "; break;
+            case GRATE_SWORD: cout << "Grate sword "; break;
+            case DAGGER: cout << "Dagger "; break;
+            case CLUB: cout << "Club "; break;
+            case AXE: cout << "Axe "; break;
+            }
+            cout << "|Physical damage: " << phisycal_damage << "\n";
+            cout << "|Magic damage: " << magic_damage << "\n";
+            cout << "|Fire damage: " << fire_damage << "\n";
+            cout << "Bleeding damage: " << bleeding_damage << "\n";
+            cout << "Ligthning damage: " << ligthning_damage << "\n";
+            cout << "Poison damage: " << poison_damage << "\n";
+            cout << "Critical damage: " << critical_damage << "\n";
+            cout << "Ice damage: " << ice_damage << "\n";
         }
 
     };
