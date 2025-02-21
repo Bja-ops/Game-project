@@ -99,6 +99,12 @@ public:
     }
 };
 
+
+    class Armor
+    {
+        
+    };
+
 int main()
 {
     cout << "What character do you choose?" << endl;
