@@ -5,7 +5,7 @@ enum ClassType { WARRIOR, MAGE, PALADIN, ASSASIN};
 
 enum WeaponType { BOW, SHIELD, WAND, SWORD, GRATE_SWORD, DAGGER, CLUB, AXE };
 
-enum ArmorType {LEATHER, IRON, OBSIDIAN, SHADOW, CHAIN_MAIL, PLATE};
+enum ArmorType {LIGHT, MEDIUM, HEAVY, MAGIC, SHADOW};
 
 class Weapon {
 public:
@@ -105,7 +105,7 @@ public:
     class Armor
     {
     public:
-        string char_name;
+        string armor_name;
         int physical_resistance;
         int magic_resistance;
         int fire_resistance;
@@ -116,7 +116,20 @@ public:
         ArmorType type;
 
         Armor(string name, int pr, int mr, int fr, int br, int lr, int por, int ir)
-            : char_name(name), physical_resistance(pr), magic_resistance(mr), fire_resistance(fr), bleeding_resistance(br), ligthning_resistance(lr), poison_resistance(por), ice_resistance(por){}
+            : armor_name(name), physical_resistance(pr), magic_resistance(mr), fire_resistance(fr), bleeding_resistance(br), ligthning_resistance(lr), poison_resistance(por), ice_resistance(por){}
+
+        void displayArmor()
+        {
+            cout << "Armor: " << armor_name << "|Type: ";
+            switch (type)
+            {
+            case LIGHT: cout << "Light "; break;
+            case MEDIUM: cout << "Medium "; break;
+            case HEAVY: cout << "Heavy "; break;
+            case MAGIC: cout << "Magic "; break;
+            case SHADOW: cout << "Shadow "; break;
+            }
+        }
     };
 
 int main()
