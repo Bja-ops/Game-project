@@ -9,6 +9,8 @@ enum HelmetType {LIGHT1, MEDIUM1, HEAVY1, MAGIC1, SHADOW1};
 
 enum ArmorType {LIGHT, MEDIUM, HEAVY, MAGIC, SHADOW};
 
+enum LegginsType{LIGHT2, MEDIUM2, HEAVY2, MAGIC2, SHADOW2};
+
 class Weapon {
 public:
     string name;
@@ -137,6 +139,20 @@ public:
     }
 };
 
+    class Leggins
+    {
+    public:
+        string leggins_name;
+        int physical_resistance;
+        int magic_resistance;
+        int fire_resistance;
+        int bleeding_resistance;
+        int ligthning_resistance;
+        int poison_resistance;
+        int ice_resistance;
+        LegginsType type;
+    };
+
 
 
 class Character {
@@ -222,6 +238,7 @@ public:
         }
     }
 };
+
 
 
 int main()
