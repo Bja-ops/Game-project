@@ -64,7 +64,7 @@ public:
     Helmet(string name, HelmetType t, int pr, int mr, int fr, int br, int lr, int por, int ir)
         : helmet_name(name), physical_resistance(pr), magic_resistance(mr), fire_resistance(fr), bleeding_resistance(br), ligthning_resistance(lr), poison_resistance(por), ice_resistance(ir), type(t){}
 
-    void displayHelmet()
+    void displayHelmetStats()
     {
         cout << "Helmet: " << helmet_name << "|Type: ";
         switch (type)
@@ -124,6 +124,17 @@ public:
         case SHADOW: cout << "Shadow "; break;
         }
     }
+    void displayStats() const
+    {
+        cout << "Armor: " << armor_name << endl;
+        cout << "Physical resistance: " << physical_resistance << endl;
+        cout << "Magic resistance: " << magic_resistance << endl;
+        cout << "Fire resistance: " << fire_resistance << endl;
+        cout << "Bleeding resistance: " << bleeding_resistance << endl;
+        cout << "Lightning resistance: " << ligthning_resistance << endl;
+        cout << "Poison resistance: " << poison_resistance << endl;
+        cout << "Ice resistance: " << ice_resistance << endl;
+    }
 };
 
 
@@ -155,11 +166,24 @@ public:
         cout << char_name << "equipped " << helmet->helmet_name << "! " << endl;
         if (equippedHelmet)
         {
-            equippedHelmet->displayHelmet();
+            equippedHelmet->displayHelmetStats();
         }
         else
         {
             cout << "No helmet equipped! " << endl;
+        }
+    }
+    void equipArmor(Armor* armor)
+    {
+        equippedArmor = armor;
+        cout << "equipped " << armor->armor_name << "! " << endl;
+        if (equippedArmor)
+        {
+            equippedArmor->displayArmor();
+        }
+        else
+        {
+            cout << "No armor equipped! " << endl;
         }
     }
 
@@ -206,19 +230,23 @@ int main()
 
     Character hero1("Arthur(warrior)", 12, 12, 7, 5, 3, 1, WARRIOR);
     Weapon sword("Excalibur", SWORD, 30, 0, 0, 0, 0, 0, 10, 0);
-    Helmet warriorHelmet("Warrior's helmet", MEDIUM1, 40, 15, 15, 20, 10, 13, 9);
+    Helmet warriorHelmet("Warrior's helmet", MEDIUM1, 40, 10, 15, 20, 10, 13, 9);
+    Armor warriorArmor("Warrior's armor", HEAVY, 60, 15, 20,30,15,15,20);
 
     Character hero2("Merlin(mage)",6, 4, 6, 15, 10, 1, MAGE);
     Weapon wand("Elder Wand", WAND, 5, 40, 30, 0, 0, 0, 5, 10);
     Helmet mageHat("Mage hat", LIGHT1, 5, 40, 30, 15, 30, 17,25);
+    Armor mageDress("Mage Dress", LIGHT, 7,40,30,18,25,19,28);
 
     Character hero3("Jarvis(paladin)",8,4,10,17,20,1,PALADIN );
     Weapon axe("Battle Axe", AXE, 50, 0, 0, 5, 0, 0, 15, 0);
     Helmet leathersHelmet("Leathers Helmet", MEDIUM1, 30, 10, 10, 20, 12,15,8);
+    Armor ironarmor("Iron armor", MEDIUM, 30, 17, 10, 30, 15, 20, 18 );
 
     Character hero4("Robin(assasin)", 10,10, 15, 8,6,1,ASSASIN);
     Weapon dagger("Shadow Dagger", DAGGER, 25, 5, 0, 10, 0, 0, 20, 0);
     Helmet shadowsHat("Shadow's hat", LIGHT1, 5,15, 10, 9, 10, 20, 13);
+    Armor shadowsArmor("Shadow's armor", MEDIUM, 15, 18, 20, 10, 20, 25, 25);
 
 
 
@@ -231,6 +259,11 @@ int main()
     hero2.equipHelmet(&mageHat);
     hero3.equipHelmet(&leathersHelmet);
     hero4.equipHelmet(&shadowsHat);
+
+    hero1.equipArmor(&warriorArmor);
+    hero2.equipArmor(&mageDress);
+    hero3.equipArmor(&ironarmor);
+    hero4.equipArmor(&shadowsArmor);
 
     hero1.displayCharacter();
     hero2.displayCharacter();
