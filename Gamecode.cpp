@@ -126,7 +126,7 @@ public:
         case SHADOW: cout << "Shadow "; break;
         }
     }
-    void displayStats() const
+    void displayArmorStats() const
     {
         cout << "Armor: " << armor_name << endl;
         cout << "Physical resistance: " << physical_resistance << endl;
@@ -151,6 +151,32 @@ public:
         int poison_resistance;
         int ice_resistance;
         LegginsType type;
+
+        Leggins(string name,LegginsType t, int pr, int mr, int fr, int br, int lr, int por, int ir)
+            :leggins_name(name), physical_resistance(pr), magic_resistance(mr), fire_resistance(fr), bleeding_resistance(br), ligthning_resistance(lr),poison_resistance(por), ice_resistance(ir), type(t){}
+        void displayLeggins()
+        {
+            cout << "Leggins: " << leggins_name << "Type: ";
+            switch (type)
+            {
+                case LIGHT2: cout << "Light "; break;
+                case MEDIUM2: cout << "Medium "; break;
+                case HEAVY2: cout << "Heavy "; break;
+                case MAGIC2: cout << "Magic "; break;
+                case SHADOW2: cout << "Shadow "; break;
+            }
+        }
+        void displayLegginsStats() const
+        {
+            cout << "Leggins: " << leggins_name <<  endl;
+            cout << "Physical resistance: " << physical_resistance << endl;
+            cout << "Magic resistance: " << magic_resistance << endl;
+            cout << "Fire resistance: " << fire_resistance << endl;
+            cout << "Bleeding resistance: " << bleeding_resistance << endl;
+            cout << "Lightning resistance: " << ligthning_resistance << endl;
+            cout << "Poison resistance: " << poison_resistance << endl;
+            cout << "Ice resistance: " << ice_resistance << endl;
+        }
     };
 
 
@@ -163,6 +189,7 @@ private:
     Weapon* equippedWeapon;
     Helmet* equippedHelmet;
     Armor* equippedArmor;
+    Leggins* equippedLeggins;
 public:
     string char_name;
     int strength, dexterity, intelligence, faith, health;
@@ -192,14 +219,27 @@ public:
     void equipArmor(Armor* armor)
     {
         equippedArmor = armor;
-        cout << "equipped " << armor->armor_name << "! " << endl;
+        cout << char_name  <<"equipped " << armor->armor_name << "! " << endl;
         if (equippedArmor)
         {
-            equippedArmor->displayArmor();
+            equippedArmor->displayArmorStats();
         }
         else
         {
             cout << "No armor equipped! " << endl;
+        }
+    }
+    void equipLeggins(Leggins* leggins)
+    {
+        equippedLeggins = leggins;
+        cout << char_name<<"equipped " << leggins->leggins_name << "! " << endl;
+        if (equippedLeggins)
+        {
+            equippedLeggins->displayLegginsStats();
+        }
+        else
+        {
+            cout << "No leggins equipped! " << endl;
         }
     }
 
@@ -249,6 +289,7 @@ int main()
     Weapon sword("Excalibur", SWORD, 30, 0, 0, 0, 0, 0, 10, 0);
     Helmet warriorHelmet("Warrior's helmet", MEDIUM1, 40, 10, 15, 20, 10, 13, 9);
     Armor warriorArmor("Warrior's armor", HEAVY, 60, 15, 20,30,15,15,20);
+    Leggins warriorLeggins("Warrior's leggins", MEDIUM2, 10, 7,9,13,16,12,8);
 
     Character hero2("Merlin(mage)",6, 4, 6, 15, 10, 1, MAGE);
     Weapon wand("Elder Wand", WAND, 5, 40, 30, 0, 0, 0, 5, 10);
@@ -281,6 +322,8 @@ int main()
     hero2.equipArmor(&mageDress);
     hero3.equipArmor(&ironarmor);
     hero4.equipArmor(&shadowsArmor);
+
+    hero1.equipLeggins(&warriorLeggins);
 
     hero1.displayCharacter();
     hero2.displayCharacter();
