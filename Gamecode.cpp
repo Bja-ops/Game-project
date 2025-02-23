@@ -263,8 +263,14 @@ public:
 
 class Equipment
 {
-private:
-    const int slots = 64;
+public:
+    int slots = 64;
+    int n;
+while(slots >= n)
+{
+    slots = slots-n;
+    cout << "Left: " << slots << "slots " << "\n";
+}
     
 };
 
