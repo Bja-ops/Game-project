@@ -156,21 +156,20 @@
         }
         initializeInventory();
 
-        function spawnRabbits() {
+        function spawnRabbit(x, y) {
             let map = document.getElementById('map');
-            for (let i = 0; i < 10; i++) {
-                let rabbit = document.createElement('div');
-                rabbit.classList.add('rabbit');
-                rabbit.style.left = Math.random() * 2000 + 'px';
-                rabbit.style.top = Math.random() * 2000 + 'px';
-                rabbit.addEventListener('click', () => attackRabbit(rabbit));
-                map.appendChild(rabbit);
-            }
+            let rabbit = document.createElement('div');
+            rabbit.classList.add('rabbit');
+            rabbit.style.left = `${x}px`;
+            rabbit.style.top = `${y}px`;
+            rabbit.addEventListener('click', () => attackRabbit(rabbit, x, y));
+            map.appendChild(rabbit);
         }
-        
-        function attackRabbit(rabbit) {
+
+        function attackRabbit(rabbit, x, y) {
             rabbit.remove();
             addItemToInventory('udko');
+            setTimeout(() => spawnRabbit(x, y), 10000);
         }
         
         function addItemToInventory(itemName) {
@@ -185,6 +184,14 @@
             slots.forEach((slot, index) => {
                 slot.textContent = inventory[index] ? inventory[index] : '';
             });
+        }
+
+        function spawnRabbits() {
+            for (let i = 0; i < 10; i++) {
+                let x = Math.random() * 2000;
+                let y = Math.random() * 2000;
+                spawnRabbit(x, y);
+            }
         }
 
         spawnRabbits();
