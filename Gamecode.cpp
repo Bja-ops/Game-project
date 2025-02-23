@@ -261,6 +261,15 @@ public:
 };
 
 
+class Equipment
+{
+private:
+    const int slots = 64;
+    
+};
+
+
+
 
 class Character {
 private:
