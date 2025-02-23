@@ -222,6 +222,45 @@ public:
     };
 
 
+class Boots
+{
+public:
+    string boots_name;
+    int physical_resistance;
+    int magic_resistance;
+    int fire_resistance;
+    int bleeding_resistance;
+    int ligthning_resistance;
+    int poison_resistance;
+    int ice_resistance;
+    BootsType type;
+
+    Boots(string name,BootsType t, int pr, int mr, int fr, int br, int lr, int por, int ir)
+        :boots_name(name), physical_resistance(pr), magic_resistance(mr), fire_resistance(fr), bleeding_resistance(br), ligthning_resistance(lr), poison_resistance(por), ice_resistance(ir), type(t){}
+
+    void displayBoots()
+    {
+        cout << "Boots: " << boots_name << " | Type: ";
+        switch (type)
+        {
+        case LIGHT4: cout << "Light"; break;
+        case MEDIUM4: cout << "Medium"; break;
+        case HEAVY4: cout << "Heavy"; break;
+        case MAGIC4: cout << "Magic"; break;
+        case SHADOW4: cout << "Shadow"; break;
+        default: cout << "UNKNOWN"; break;
+        }
+        cout << " | Physical resistance: " << physical_resistance << "\n";
+        cout << "| Magic resistance: " << magic_resistance << "\n";
+        cout << "| Fire resistance: " << fire_resistance << "\n";
+        cout << "| Bleeding resistance: " << bleeding_resistance << "\n";
+        cout << "| Lightning resistance: " << ligthning_resistance << "\n";
+        cout << "| Poison resistance: " << poison_resistance << "\n";
+        cout << "| Ice resistance: " << ice_resistance << "\n";
+    }
+};
+
+
 
 class Character {
 private:
@@ -233,6 +272,7 @@ private:
     Helmet* equippedHelmet;
     Armor* equippedArmor;
     Leggins* equippedLeggins;
+    Boots* equippedBoots;
 public:
     string char_name;
     int strength, dexterity, intelligence, faith, health;
@@ -306,6 +346,19 @@ public:
             cout << "No leggins equipped! " << endl;
         }
     }
+    void equipBoots(Boots* boots)
+    {
+        equippedBoots = boots;
+        cout << char_name << "equipped " << boots->boots_name << "! " << endl;
+        if (equippedBoots)
+        {
+            equippedBoots->displayBoots();
+        }
+        else
+        {
+            cout << "No boots equipped! " << endl;
+        }
+    }
 
     void gainExperience(int amount) {
         experience += amount;
@@ -355,6 +408,7 @@ int main()
     Helmet warriorHelmet("Warrior's helmet", MEDIUM1, 40, 10, 15, 20, 10, 13, 9);
     Armor warriorArmor("Warrior's armor", HEAVY, 60, 15, 20,30,15,15,20);
     Leggins warriorLeggins("Warrior's leggins", MEDIUM2, 10, 7,9,13,16,12,8);
+    Boots warriorBoots("Warrior's name", MEDIUM4,6, 5, 3, 7, 8, 10, 5);
 
     Character hero2("Merlin(mage)",6, 4, 6, 15, 10, 1, MAGE);
     Weapon wand("Elder Wand", WAND, 5, 40, 30, 0, 0, 0, 5, 10);
@@ -362,13 +416,15 @@ int main()
     Helmet mageHat("Mage hat", LIGHT1, 5, 40, 30, 15, 30, 17,25);
     Armor mageDress("Mage Dress", LIGHT, 7,60,45,18,25,19,28);
     Leggins mageLeggins("Mage leggins", LIGHT2, 3,25,17,13,20,19,20);
+    Boots mageBoots("Mage boots", LIGHT4, 5, 20, 10, 7, 14, 12, 15);
 
     Character hero3("Jarvis(paladin)",8,4,10,17,20,1,PALADIN );
     Weapon axe("Battle Axe", AXE, 50, 0, 0, 5, 0, 0, 15, 0);
     Shield ironShield("Iron shield", HEAVY3, 25, 13, 6, 0,5,10,8);
     Helmet leathersHelmet("Leathers Helmet", MEDIUM1, 30, 10, 10, 20, 12,15,8);
-    Armor ironArmor("Iron armor", MEDIUM, 30, 17, 10, 30, 15, 20, 18 );
+    Armor ironArmor("Iron armor", MEDIUM, 30, 17, 20, 30, 15, 20, 18 );
     Leggins ironLeggins("Iron leggins", HEAVY2,20,13,8,15,7,17,13);
+    Boots leatherBoots("Leather boots", MEDIUM4, 15, 10, 5, 10, 4, 12, 6);
 
     Character hero4("Robin(assasin)", 10,10, 15, 8,6,1,ASSASIN);
     Weapon dagger("Shadow Dagger", DAGGER, 25, 5, 0, 10, 0, 0, 20, 0);
@@ -376,7 +432,7 @@ int main()
     Helmet shadowsHat("Shadow's mask", LIGHT1, 5,15, 10, 9, 10, 20, 13);
     Armor shadowsArmor("Shadow's armor", MEDIUM, 15, 18, 20, 10, 20, 25, 25);
     Leggins shadowsLeggins("Shadow's leggins", MEDIUM2, 15, 10, 25, 15, 17, 8, 9);
-
+    Boots shadowsBoots("Shadow's boots", MEDIUM4, 8, 5, 10, 12, 13, 9, 7);
 
 
     hero1.equipWeapon(&sword);
@@ -403,6 +459,11 @@ int main()
     hero2.equipLeggins(&mageLeggins);
     hero3.equipLeggins(&mageLeggins);
     hero4.equipLeggins(&shadowsLeggins);
+
+    hero1.equipBoots(&warriorBoots);
+    hero2.equipBoots(&mageBoots);
+    hero3.equipBoots(&leatherBoots);
+    hero4.equipBoots(&shadowsBoots);
 
     hero1.displayCharacter();
     hero2.displayCharacter();
