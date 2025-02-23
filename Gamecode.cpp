@@ -261,23 +261,13 @@ public:
 };
 
 
-    int Equipment(int slots = 64, int n=1)
-    {
-        while(slots <= n)
-        {
-            if(slots == 0)
-            {
-                cout << "Euipment full! " << "\n";
-            }
-            else
-            {
-                slots = slots-n;
-                cout << "Left: " << slots << "slots" << "\n";
-            }
-        }
-        return slots;
-        
-    }
+class Equipment
+{
+private:
+    const int slots = 64;
+
+};
+
 
 
 
@@ -293,8 +283,6 @@ private:
     Leggins* equippedLeggins;
     Boots* equippedBoots;
 public:
-int slots = 64;
-int n = 1;
     string char_name;
     int strength, dexterity, intelligence, faith, health;
     ClassType class_type;
@@ -334,7 +322,6 @@ int n = 1;
         cout << char_name << "equipped " << helmet->helmet_name << "! " << endl;
         if (equippedHelmet)
         {
-            cout << Equipment(slots, n) << "\n";
             equippedHelmet->displayHelmetStats();
         }
         else
@@ -344,7 +331,6 @@ int n = 1;
     }
     void equipArmor(Armor* armor)
     {
-        
         equippedArmor = armor;
         cout << char_name  <<"equipped " << armor->armor_name << "! " << endl;
         if (equippedArmor)
@@ -395,7 +381,7 @@ int n = 1;
         {
             experience -= experienceToNextLevel;
             level++;
-            experienceToNextLevel += 150;
+            experienceToNextLevel *= 15/100;
             cout << "Leveled up! " << level << "!\n";
         }
     }
@@ -423,8 +409,6 @@ int n = 1;
 
 int main()
 {
-    int slots = 64;
-    int n = 1;
     cout << "What character do you choose?" << endl;
 
     Character hero1("Arthur(warrior)", 12, 12, 7, 5, 3, 1, WARRIOR);
@@ -497,7 +481,6 @@ int main()
 
     hero1.gainExperience(150);
     hero1.displayStats();
-    
 
     return 0;
 }
