@@ -5,6 +5,8 @@ enum ClassType { WARRIOR, MAGE, PALADIN, ASSASIN};
 
 enum WeaponType { BOW, SHIELD, WAND, SWORD, GRATE_SWORD, DAGGER, CLUB, AXE };
 
+enum ShieldType {LIGHT3, MEDIUM3, HEAVY3, MAGIC3, SHADOW3};
+
 enum HelmetType { LIGHT1, MEDIUM1, HEAVY1, MAGIC1, SHADOW1};
 
 enum ArmorType { LIGHT, MEDIUM, HEAVY, MAGIC, SHADOW};
@@ -38,6 +40,7 @@ public:
         case DAGGER: cout << "Dagger "; break;
         case CLUB: cout << "Club "; break;
         case AXE: cout << "Axe "; break;
+        default: cout << "Unknown "; break;
         }
         cout << " | Physical damage: " << phisycal_damage << "\n";
         cout << " | Magic damage: " << magic_damage << "\n";
@@ -76,6 +79,7 @@ public:
         case HEAVY1: cout << "Heavy "; break;
         case MAGIC1: cout << "Magic "; break;
         case SHADOW1: cout << "Shadow "; break;
+        default: cout << "Unknown "; break;
         }
         cout << " | Physical resistance: " << physical_resistance << "\n";
         cout << " | Magic resistance: " << magic_resistance << "\n";
@@ -124,7 +128,7 @@ public:
         case HEAVY: cout << "Heavy "; break;
         case MAGIC: cout << "Magic "; break;
         case SHADOW: cout << "Shadow "; break;
-
+        default: cout << "Unknown "; break;
         }
         cout << "| Armor: " << armor_name << "\n";
         cout << "| Physical resistance: " << physical_resistance << "\n";
@@ -152,18 +156,21 @@ public:
 
         Leggins(string name,LegginsType t, int pr, int mr, int fr, int br, int lr, int por, int ir)
             :leggins_name(name), physical_resistance(pr), magic_resistance(mr), fire_resistance(fr), bleeding_resistance(br), ligthning_resistance(lr),poison_resistance(por), ice_resistance(ir), type(t){}
-        void displayLeggins() const
+        void displayLeggins()
         {
-            cout << "| Leggins: " << leggins_name <<"|Type: "<< type;
+            cout << "Leggins: " << leggins_name << " | Type: ";
+
             switch (type)
             {
-            case LIGHT2: cout << "Light "; break;
-            case MEDIUM2: cout << "Medium "; break;
-            case HEAVY2: cout << "Heavy "; break;
-            case MAGIC2: cout << "Magic "; break;
-            case SHADOW2: cout << "Shadow "; break;
+            case LIGHT2: cout << "Light"; break;
+            case MEDIUM2: cout << "Medium"; break;
+            case HEAVY2: cout << "Heavy"; break;
+            case MAGIC2: cout << "Magic"; break;
+            case SHADOW2: cout << "Shadow"; break;
+            default: cout << "UNKNOWN"; break;  // Na wypadek błędu
             }
-            cout << "| Physical resistance: " << physical_resistance << "\n";
+
+            cout << " | Physical resistance: " << physical_resistance << "\n";
             cout << "| Magic resistance: " << magic_resistance << "\n";
             cout << "| Fire resistance: " << fire_resistance << "\n";
             cout << "| Bleeding resistance: " << bleeding_resistance << "\n";
@@ -171,7 +178,6 @@ public:
             cout << "| Poison resistance: " << poison_resistance << "\n";
             cout << "| Ice resistance: " << ice_resistance << "\n";
         }
-
     };
 
 
@@ -298,16 +304,19 @@ int main()
     Weapon wand("Elder Wand", WAND, 5, 40, 30, 0, 0, 0, 5, 10);
     Helmet mageHat("Mage hat", LIGHT1, 5, 40, 30, 15, 30, 17,25);
     Armor mageDress("Mage Dress", LIGHT, 7,40,30,18,25,19,28);
+    Leggins mageLeggins("Mage leggins", LIGHT2, 3,25,17,13,20,19,20);
 
     Character hero3("Jarvis(paladin)",8,4,10,17,20,1,PALADIN );
     Weapon axe("Battle Axe", AXE, 50, 0, 0, 5, 0, 0, 15, 0);
     Helmet leathersHelmet("Leathers Helmet", MEDIUM1, 30, 10, 10, 20, 12,15,8);
-    Armor ironarmor("Iron armor", MEDIUM, 30, 17, 10, 30, 15, 20, 18 );
+    Armor ironArmor("Iron armor", MEDIUM, 30, 17, 10, 30, 15, 20, 18 );
+    Leggins ironLeggins("Iron leggins", HEAVY2,20,13,8,15,7,17,13);
 
     Character hero4("Robin(assasin)", 10,10, 15, 8,6,1,ASSASIN);
     Weapon dagger("Shadow Dagger", DAGGER, 25, 5, 0, 10, 0, 0, 20, 0);
     Helmet shadowsHat("Shadow's hat", LIGHT1, 5,15, 10, 9, 10, 20, 13);
     Armor shadowsArmor("Shadow's armor", MEDIUM, 15, 18, 20, 10, 20, 25, 25);
+    Leggins shadowsLeggins("Shadow's leggins", MEDIUM2, 15, 10, 25, 15, 17, 8, 9);
 
 
 
@@ -323,10 +332,13 @@ int main()
 
     hero1.equipArmor(&warriorArmor);
     hero2.equipArmor(&mageDress);
-    hero3.equipArmor(&ironarmor);
+    hero3.equipArmor(&ironArmor);
     hero4.equipArmor(&shadowsArmor);
 
     hero1.equipLeggins(&warriorLeggins);
+    hero2.equipLeggins(&mageLeggins);
+    hero3.equipLeggins(&mageLeggins);
+    hero4.equipLeggins(&shadowsLeggins);
 
     hero1.displayCharacter();
     hero2.displayCharacter();
