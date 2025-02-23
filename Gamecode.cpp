@@ -381,8 +381,8 @@ public:
         {
             experience -= experienceToNextLevel;
             level++;
-            experienceToNextLevel *= 15/100;
-            cout << "Leveled up! " << level << "!\n";
+            experienceToNextLevel = static_cast<int>(experienceToNextLevel * 1.15); // Zwiększamy o 15%
+            cout << "Leveled up! Now level " << level << "!\n";
         }
     }
 
