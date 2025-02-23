@@ -5,11 +5,11 @@ enum ClassType { WARRIOR, MAGE, PALADIN, ASSASIN};
 
 enum WeaponType { BOW, SHIELD, WAND, SWORD, GRATE_SWORD, DAGGER, CLUB, AXE };
 
-enum HelmetType {LIGHT1, MEDIUM1, HEAVY1, MAGIC1, SHADOW1};
+enum HelmetType { LIGHT1, MEDIUM1, HEAVY1, MAGIC1, SHADOW1};
 
-enum ArmorType {LIGHT, MEDIUM, HEAVY, MAGIC, SHADOW};
+enum ArmorType { LIGHT, MEDIUM, HEAVY, MAGIC, SHADOW};
 
-enum LegginsType{LIGHT2, MEDIUM2, HEAVY2, MAGIC2, SHADOW2};
+enum LegginsType { LIGHT2, MEDIUM2, HEAVY2, MAGIC2, SHADOW2};
 
 class Weapon {
 public:
@@ -74,7 +74,7 @@ public:
         case LIGHT1: cout << "Light "; break;
         case MEDIUM1: cout << "Medium "; break;
         case HEAVY1: cout << "Heavy "; break;
-        case MAGIC1: cout << "Maagic "; break;
+        case MAGIC1: cout << "Magic "; break;
         case SHADOW1: cout << "Shadow "; break;
         }
         cout << " | Physical resistance: " << physical_resistance << "\n";
@@ -87,14 +87,14 @@ public:
     }
     void displayStats() const
     {
-        cout << "Helmet: " << helmet_name << "\n";
-        cout << "Physical resistance: " << physical_resistance << "\n";
-        cout << "Magic resistance: " << magic_resistance << "\n";
-        cout << "Fire resistance: " << fire_resistance << "\n";
-        cout << "Bleeding resistance: " << bleeding_resistance << "\n";
-        cout << "Lightning resistance: " << ligthning_resistance << "\n";
-        cout << "Poison resistance: " << poison_resistance << "\n";
-        cout << "Ice resistance: " << ice_resistance << "\n";
+        cout << "| Helmet: " << helmet_name << "\n";
+        cout << "| Physical resistance: " << physical_resistance << "\n";
+        cout << "| Magic resistance: " << magic_resistance << "\n";
+        cout << "| Fire resistance: " << fire_resistance << "\n";
+        cout << "| Bleeding resistance: " << bleeding_resistance << "\n";
+        cout << "| Lightning resistance: " << ligthning_resistance << "\n";
+        cout << "| Poison resistance: " << poison_resistance << "\n";
+        cout << "| Ice resistance: " << ice_resistance << "\n";
     }
 };
 
@@ -124,18 +124,16 @@ public:
         case HEAVY: cout << "Heavy "; break;
         case MAGIC: cout << "Magic "; break;
         case SHADOW: cout << "Shadow "; break;
+
         }
-    }
-    void displayArmorStats() const
-    {
-        cout << "Armor: " << armor_name << endl;
-        cout << "Physical resistance: " << physical_resistance << endl;
-        cout << "Magic resistance: " << magic_resistance << endl;
-        cout << "Fire resistance: " << fire_resistance << endl;
-        cout << "Bleeding resistance: " << bleeding_resistance << endl;
-        cout << "Lightning resistance: " << ligthning_resistance << endl;
-        cout << "Poison resistance: " << poison_resistance << endl;
-        cout << "Ice resistance: " << ice_resistance << endl;
+        cout << "| Armor: " << armor_name << "\n";
+        cout << "| Physical resistance: " << physical_resistance << "\n";
+        cout << "| Magic resistance: " << magic_resistance << "\n";
+        cout << "| Fire resistance: " << fire_resistance << "\n";
+        cout << "| Bleeding resistance: " << bleeding_resistance << "\n";
+        cout << "| Lightning resistance: " << ligthning_resistance << "\n";
+        cout << "| Poison resistance: " << poison_resistance << "\n";
+        cout << "| Ice resistance: " << ice_resistance << "\n";
     }
 };
 
@@ -154,29 +152,26 @@ public:
 
         Leggins(string name,LegginsType t, int pr, int mr, int fr, int br, int lr, int por, int ir)
             :leggins_name(name), physical_resistance(pr), magic_resistance(mr), fire_resistance(fr), bleeding_resistance(br), ligthning_resistance(lr),poison_resistance(por), ice_resistance(ir), type(t){}
-        void displayLeggins()
+        void displayLeggins() const
         {
-            cout << "Leggins: " << leggins_name << "Type: ";
+            cout << "| Leggins: " << leggins_name <<"|Type: "<< type;
             switch (type)
             {
-                case LIGHT2: cout << "Light "; break;
-                case MEDIUM2: cout << "Medium "; break;
-                case HEAVY2: cout << "Heavy "; break;
-                case MAGIC2: cout << "Magic "; break;
-                case SHADOW2: cout << "Shadow "; break;
+            case LIGHT2: cout << "Light "; break;
+            case MEDIUM2: cout << "Medium "; break;
+            case HEAVY2: cout << "Heavy "; break;
+            case MAGIC2: cout << "Magic "; break;
+            case SHADOW2: cout << "Shadow "; break;
             }
+            cout << "| Physical resistance: " << physical_resistance << "\n";
+            cout << "| Magic resistance: " << magic_resistance << "\n";
+            cout << "| Fire resistance: " << fire_resistance << "\n";
+            cout << "| Bleeding resistance: " << bleeding_resistance << "\n";
+            cout << "| Lightning resistance: " << ligthning_resistance << "\n";
+            cout << "| Poison resistance: " << poison_resistance << "\n";
+            cout << "| Ice resistance: " << ice_resistance << "\n";
         }
-        void displayLegginsStats() const
-        {
-            cout << "Leggins: " << leggins_name <<  endl;
-            cout << "Physical resistance: " << physical_resistance << endl;
-            cout << "Magic resistance: " << magic_resistance << endl;
-            cout << "Fire resistance: " << fire_resistance << endl;
-            cout << "Bleeding resistance: " << bleeding_resistance << endl;
-            cout << "Lightning resistance: " << ligthning_resistance << endl;
-            cout << "Poison resistance: " << poison_resistance << endl;
-            cout << "Ice resistance: " << ice_resistance << endl;
-        }
+
     };
 
 
@@ -202,6 +197,14 @@ public:
     {
         equippedWeapon = weapon;
         cout << char_name << " equipped " << weapon->name << "! " << endl;
+        if (equippedWeapon)
+        {
+            equippedWeapon-> displayWeapon();
+        }
+        else
+        {
+            cout << "No weapon equipped! " << endl;
+        }
     }
     void equipHelmet(Helmet* helmet)
     {
@@ -222,7 +225,7 @@ public:
         cout << char_name  <<"equipped " << armor->armor_name << "! " << endl;
         if (equippedArmor)
         {
-            equippedArmor->displayArmorStats();
+            equippedArmor->displayArmor();
         }
         else
         {
@@ -235,7 +238,7 @@ public:
         cout << char_name<<"equipped " << leggins->leggins_name << "! " << endl;
         if (equippedLeggins)
         {
-            equippedLeggins->displayLegginsStats();
+            equippedLeggins->displayLeggins();
         }
         else
         {
