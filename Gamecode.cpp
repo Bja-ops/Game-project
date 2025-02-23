@@ -13,6 +13,8 @@ enum ArmorType { LIGHT, MEDIUM, HEAVY, MAGIC, SHADOW};
 
 enum LegginsType { LIGHT2, MEDIUM2, HEAVY2, MAGIC2, SHADOW2};
 
+enum BootsType {LIGHT4, MEDIUM4, HEAVY4, MAGIC4, SHADOW4};
+
 class Weapon {
 public:
     string name;
@@ -51,6 +53,45 @@ public:
         cout << " | Critical damage: " << critical_damage << "\n";
         cout << " | Ice damage: " << ice_damage << "\n";
     }
+};
+
+class Shield
+{
+public:
+    string shield_name;
+    int physical_resistance;
+    int magic_resistance;
+    int fire_resistance;
+    int bleeding_resistance;
+    int ligthning_resistance;
+    int poison_resistance;
+    int ice_resistance;
+    ShieldType type;
+
+    Shield(string name, ShieldType t, int pr, int mr, int fr, int br, int lr, int por, int ir)
+        : shield_name(name), physical_resistance(pr), magic_resistance(mr), fire_resistance(fr), bleeding_resistance(br), ligthning_resistance(lr), poison_resistance(por), ice_resistance(ir), type(t) {}
+
+    void displayShieldStats()
+    {
+        cout << "Shield: " << shield_name <<"| Type: ";
+        switch (type)
+        {
+            case LIGHT3: cout << "Light "; break;
+            case MEDIUM3: cout << "Medium "; break;
+            case HEAVY3: cout << "Heavy "; break;
+            case MAGIC3: cout << "Magic "; break;
+            case SHADOW3: cout << "Shadow "; break;
+        default: cout << "Unknown "; break;
+        }
+        cout << " | Physical resistance: " << physical_resistance << "\n";
+        cout << "| Magic resistance: " << magic_resistance << "\n";
+        cout << "| Fire resistance: " << fire_resistance << "\n";
+        cout << "| Bleeding resistance: " << bleeding_resistance << "\n";
+        cout << "| Lightning resistance: " << ligthning_resistance << "\n";
+        cout << "| Poison resistance: " << poison_resistance << "\n";
+        cout << "| Ice resistance: " << ice_resistance << "\n";
+    }
+
 };
 
 class Helmet
@@ -167,7 +208,7 @@ public:
             case HEAVY2: cout << "Heavy"; break;
             case MAGIC2: cout << "Magic"; break;
             case SHADOW2: cout << "Shadow"; break;
-            default: cout << "UNKNOWN"; break;  // Na wypadek błędu
+            default: cout << "UNKNOWN"; break;
             }
 
             cout << " | Physical resistance: " << physical_resistance << "\n";
@@ -188,6 +229,7 @@ private:
     int experience;
     int experienceToNextLevel;
     Weapon* equippedWeapon;
+    Shield* equippedShield;
     Helmet* equippedHelmet;
     Armor* equippedArmor;
     Leggins* equippedLeggins;
@@ -210,6 +252,19 @@ public:
         else
         {
             cout << "No weapon equipped! " << endl;
+        }
+    }
+    void equipShield(Shield* shield)
+    {
+        equippedShield = shield;
+        cout << char_name << "equipped " << shield->shield_name << "! " << endl;
+        if (equippedShield)
+        {
+            equippedShield->displayShieldStats();
+        }
+        else
+        {
+            cout << "No shield equipped! " << endl;
         }
     }
     void equipHelmet(Helmet* helmet)
@@ -296,25 +351,29 @@ int main()
 
     Character hero1("Arthur(warrior)", 12, 12, 7, 5, 3, 1, WARRIOR);
     Weapon sword("Excalibur", SWORD, 30, 0, 0, 0, 0, 0, 10, 0);
+    Shield leatherShield("Leather shield",MEDIUM3,20, 10, 15, 0,8,5,4);
     Helmet warriorHelmet("Warrior's helmet", MEDIUM1, 40, 10, 15, 20, 10, 13, 9);
     Armor warriorArmor("Warrior's armor", HEAVY, 60, 15, 20,30,15,15,20);
     Leggins warriorLeggins("Warrior's leggins", MEDIUM2, 10, 7,9,13,16,12,8);
 
     Character hero2("Merlin(mage)",6, 4, 6, 15, 10, 1, MAGE);
     Weapon wand("Elder Wand", WAND, 5, 40, 30, 0, 0, 0, 5, 10);
+    Shield magicStone("Magic stone", LIGHT3,5,40,30,0,25,10,20);
     Helmet mageHat("Mage hat", LIGHT1, 5, 40, 30, 15, 30, 17,25);
-    Armor mageDress("Mage Dress", LIGHT, 7,40,30,18,25,19,28);
+    Armor mageDress("Mage Dress", LIGHT, 7,60,45,18,25,19,28);
     Leggins mageLeggins("Mage leggins", LIGHT2, 3,25,17,13,20,19,20);
 
     Character hero3("Jarvis(paladin)",8,4,10,17,20,1,PALADIN );
     Weapon axe("Battle Axe", AXE, 50, 0, 0, 5, 0, 0, 15, 0);
+    Shield ironShield("Iron shield", HEAVY3, 25, 13, 6, 0,5,10,8);
     Helmet leathersHelmet("Leathers Helmet", MEDIUM1, 30, 10, 10, 20, 12,15,8);
     Armor ironArmor("Iron armor", MEDIUM, 30, 17, 10, 30, 15, 20, 18 );
     Leggins ironLeggins("Iron leggins", HEAVY2,20,13,8,15,7,17,13);
 
     Character hero4("Robin(assasin)", 10,10, 15, 8,6,1,ASSASIN);
     Weapon dagger("Shadow Dagger", DAGGER, 25, 5, 0, 10, 0, 0, 20, 0);
-    Helmet shadowsHat("Shadow's hat", LIGHT1, 5,15, 10, 9, 10, 20, 13);
+    Shield shadowsShield("Shadow's shield", LIGHT3, 5,10,7,0,15,8,13);
+    Helmet shadowsHat("Shadow's mask", LIGHT1, 5,15, 10, 9, 10, 20, 13);
     Armor shadowsArmor("Shadow's armor", MEDIUM, 15, 18, 20, 10, 20, 25, 25);
     Leggins shadowsLeggins("Shadow's leggins", MEDIUM2, 15, 10, 25, 15, 17, 8, 9);
 
@@ -324,6 +383,11 @@ int main()
     hero2.equipWeapon(&wand);
     hero3.equipWeapon(&axe);
     hero4.equipWeapon(&dagger);
+
+    hero1.equipShield(&leatherShield);
+    hero2.equipShield(&magicStone);
+    hero3.equipShield(&ironShield);
+    hero4.equipShield(&shadowsShield);
 
     hero1.equipHelmet(&warriorHelmet);
     hero2.equipHelmet(&mageHat);
