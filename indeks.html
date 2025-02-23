@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slytherium - MMORPG</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #2c2f33;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #map {
+            position: absolute;
+            width: 2000px;
+            height: 2000px;
+            background: url('mapa.png') repeat;
+        }
+        #player {
+            width: 30px;
+            height: 30px;
+            background-color: blue;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s linear;
+        }
+        .enemy {
+            width: 30px;
+            height: 30px;
+            background-color: brown;
+            position: absolute;
+            cursor: pointer;
+        }
+        .enemy-health {
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: red;
+            top: -10px;
+        }
+        .loot {
+            width: 20px;
+            height: 20px;
+            background: gold;
+            position: absolute;
+            cursor: pointer;
+        }
+        #fight-window {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #23272a;
+            padding: 20px;
+            border: 2px solid white;
+            text-align: center;
+        }
+        #ui {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #23272a;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+        #inventory {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2c2f33;
+            padding: 10px;
+            border: 2px solid white;
+        }
+        #inventory-slots {
+            display: grid;
+            grid-template-columns: repeat(8, 40px);
+            grid-gap: 5px;
+            background: #1e2124;
+            padding: 10px;
+        }
+        .inventory-slot {
+            width: 40px;
+            height: 40px;
+            background: gray;
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="map">
+            <div id="player"></div>
+        </div>
+    </div>
+    <div id="ui">
+        <button onclick="toggleInventory()">Ekwipunek</button>
+        <span>Poziom: <span id="level">1</span></span>
+        <span>HP: <span id="hp">100</span></span>
+        <span>EXP: <span id="exp">0</span></span>
+    </div>
+    <div id="inventory">
+        <h3>Ekwipunek</h3>
+        <div id="inventory-slots"></div>
+        <button onclick="toggleInventory()">Zamknij</button>
+    </div>
+    <script>
+        let player = document.getElementById('player');
+        let map = document.getElementById('map');
+        let playerSpeed = 5;
+        let keys = {};
+        let inventoryVisible = false;
+        let inventory = [];
+
+        window.addEventListener('keydown', (e) => { keys[e.key] = true; });
+        window.addEventListener('keyup', (e) => { keys[e.key] = false; });
+
+        function movePlayer() {
+            let x = parseInt(map.style.left) || 0;
+            let y = parseInt(map.style.top) || 0;
+            if (keys['ArrowUp']) y += playerSpeed;
+            if (keys['ArrowDown']) y -= playerSpeed;
+            if (keys['ArrowLeft']) x += playerSpeed;
+            if (keys['ArrowRight']) x -= playerSpeed;
+            map.style.left = `${x}px`;
+            map.style.top = `${y}px`;
+            requestAnimationFrame(movePlayer);
+        }
+        movePlayer();
+
+        function toggleInventory() {
+            inventoryVisible = !inventoryVisible;
+            document.getElementById('inventory').style.display = inventoryVisible ? 'block' : 'none';
+        }
+
+        function initializeInventory() {
+            let inventorySlots = document.getElementById('inventory-slots');
+            for (let i = 0; i < 32; i++) {
+                let slot = document.createElement('div');
+                slot.classList.add('inventory-slot');
+                inventorySlots.appendChild(slot);
+            }
+        }
+        initializeInventory();
+
+        function spawnLoot(x, y) {
+            let loot = document.createElement('div');
+            loot.classList.add('loot');
+            loot.style.left = `${x}px`;
+            loot.style.top = `${y}px`;
+            loot.onclick = function() {
+                addItemToInventory('Losowy przedmiot');
+                loot.remove();
+            };
+            map.appendChild(loot);
+        }
+
+        function addItemToInventory(item) {
+            if (inventory.length < 32) {
+                inventory.push(item);
+                updateInventoryDisplay();
+            }
+        }
+
+        function updateInventoryDisplay() {
+            let inventorySlots = document.getElementById('inventory-slots').children;
+            for (let i = 0; i < 32; i++) {
+                inventorySlots[i].textContent = inventory[i] || '';
+            }
+        }
+
+        spawnLoot(300, 300);
+        spawnLoot(500, 500);
+    </script>
+</body>
+</html>
