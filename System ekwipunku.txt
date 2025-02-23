@@ -1,0 +1,16 @@
+const int slots = 64 // liczba slotów dostępna w ekwipunku
+
+Jeśli zbieram przedmiot, to zmniejsz sloty o n
+while(slots >= n)
+{
+	slots = slots-n;
+	if(slots = n)
+{
+	cout << "Equipment full! " << "\n";
+}
+	else if(slots > n)
+{
+	cout << "Left " << n << slots << "\n";
+}
+
+}
