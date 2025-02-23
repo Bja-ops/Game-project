@@ -32,12 +32,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            transition: transform 0.1s linear;
         }
         .enemy {
             width: 30px;
             height: 30px;
             background-color: brown;
+            position: absolute;
+            cursor: pointer;
+        }
+        .rabbit {
+            width: 20px;
+            height: 20px;
+            background-color: yellow;
             position: absolute;
             cursor: pointer;
         }
@@ -47,13 +53,6 @@
             height: 5px;
             background: red;
             top: -10px;
-        }
-        .loot {
-            width: 20px;
-            height: 20px;
-            background: gold;
-            position: absolute;
-            cursor: pointer;
         }
         #fight-window {
             display: none;
@@ -118,25 +117,26 @@
         <button onclick="toggleInventory()">Zamknij</button>
     </div>
     <script>
-        let player = document.getElementById('player');
-        let map = document.getElementById('map');
         let playerSpeed = 5;
         let keys = {};
+        let player = document.getElementById('player');
         let inventoryVisible = false;
+        let playerX = window.innerWidth / 2;
+        let playerY = window.innerHeight / 2;
         let inventory = [];
 
         window.addEventListener('keydown', (e) => { keys[e.key] = true; });
         window.addEventListener('keyup', (e) => { keys[e.key] = false; });
 
         function movePlayer() {
-            let x = parseInt(map.style.left) || 0;
-            let y = parseInt(map.style.top) || 0;
-            if (keys['ArrowUp']) y += playerSpeed;
-            if (keys['ArrowDown']) y -= playerSpeed;
-            if (keys['ArrowLeft']) x += playerSpeed;
-            if (keys['ArrowRight']) x -= playerSpeed;
-            map.style.left = `${x}px`;
-            map.style.top = `${y}px`;
+            if (keys['ArrowUp']) playerY -= playerSpeed;
+            if (keys['ArrowDown']) playerY += playerSpeed;
+            if (keys['ArrowLeft']) playerX -= playerSpeed;
+            if (keys['ArrowRight']) playerX += playerSpeed;
+            
+            player.style.left = `${playerX}px`;
+            player.style.top = `${playerY}px`;
+            
             requestAnimationFrame(movePlayer);
         }
         movePlayer();
@@ -156,34 +156,38 @@
         }
         initializeInventory();
 
-        function spawnLoot(x, y) {
-            let loot = document.createElement('div');
-            loot.classList.add('loot');
-            loot.style.left = `${x}px`;
-            loot.style.top = `${y}px`;
-            loot.onclick = function() {
-                addItemToInventory('Losowy przedmiot');
-                loot.remove();
-            };
-            map.appendChild(loot);
+        function spawnRabbits() {
+            let map = document.getElementById('map');
+            for (let i = 0; i < 10; i++) {
+                let rabbit = document.createElement('div');
+                rabbit.classList.add('rabbit');
+                rabbit.style.left = Math.random() * 2000 + 'px';
+                rabbit.style.top = Math.random() * 2000 + 'px';
+                rabbit.addEventListener('click', () => attackRabbit(rabbit));
+                map.appendChild(rabbit);
+            }
         }
-
-        function addItemToInventory(item) {
+        
+        function attackRabbit(rabbit) {
+            rabbit.remove();
+            addItemToInventory('udko');
+        }
+        
+        function addItemToInventory(itemName) {
             if (inventory.length < 32) {
-                inventory.push(item);
-                updateInventoryDisplay();
+                inventory.push(itemName);
+                updateInventoryUI();
             }
         }
-
-        function updateInventoryDisplay() {
-            let inventorySlots = document.getElementById('inventory-slots').children;
-            for (let i = 0; i < 32; i++) {
-                inventorySlots[i].textContent = inventory[i] || '';
-            }
+        
+        function updateInventoryUI() {
+            let slots = document.querySelectorAll('.inventory-slot');
+            slots.forEach((slot, index) => {
+                slot.textContent = inventory[index] ? inventory[index] : '';
+            });
         }
 
-        spawnLoot(300, 300);
-        spawnLoot(500, 500);
+        spawnRabbits();
     </script>
 </body>
 </html>
