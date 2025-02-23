@@ -381,10 +381,29 @@ public:
         {
             experience -= experienceToNextLevel;
             level++;
-            experienceToNextLevel = static_cast<int>(experienceToNextLevel * 1.15); 
+            if (level < 10) 
+            {
+                experienceToNextLevel *= 1.2; // Początkowe levele są łatwiejsze
+            } 
+            else if (level < 20) 
+            {
+                experienceToNextLevel *= 1.5; // Poziomy 10-20 trudniejsze
+            } 
+            else if (level < 50) 
+            {
+                experienceToNextLevel *= 2.0; // Skokowe zwiększenie wymagań
+            } 
+            else 
+            {
+                experienceToNextLevel *= 2.5; // Endgame – bardzo wysokie wymagania
+            }
+
+            experienceToNextLevel = static_cast<int>(experienceToNextLevel); // Zaokrąglamy do liczby całkowitej
+
             cout << "Leveled up! Now level " << level << "!\n";
         }
     }
+
 
     void displayStats() const
     {
