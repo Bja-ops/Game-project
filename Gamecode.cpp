@@ -381,19 +381,19 @@ public:
         {
             experience -= experienceToNextLevel;
             level++;
-            if (level < 10) 
+            if (level < 10)
             {
                 experienceToNextLevel *= 1.2; // Początkowe levele są łatwiejsze
-            } 
-            else if (level < 20) 
+            }
+            else if (level < 20)
             {
                 experienceToNextLevel *= 1.5; // Poziomy 10-20 trudniejsze
-            } 
-            else if (level < 50) 
+            }
+            else if (level < 50)
             {
                 experienceToNextLevel *= 2.0; // Skokowe zwiększenie wymagań
-            } 
-            else 
+            }
+            else
             {
                 experienceToNextLevel *= 2.5; // Endgame – bardzo wysokie wymagania
             }
@@ -498,7 +498,7 @@ int main()
     hero3.displayCharacter();
     hero4.displayCharacter();
 
-    hero1.gainExperience(150);
+    hero1.gainExperience(10000);
     hero1.displayStats();
 
     return 0;
