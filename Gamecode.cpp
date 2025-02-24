@@ -15,6 +15,10 @@ enum LegginsType { LIGHT2, MEDIUM2, HEAVY2, MAGIC2, SHADOW2};
 
 enum BootsType {LIGHT4, MEDIUM4, HEAVY4, MAGIC4, SHADOW4};
 
+enum EnemyType {COMMON, ELDER, WAR_LORD, TITAN, ANCIENT, LEVIATHAN};
+
+
+
 class Weapon {
 public:
     string name;
@@ -261,15 +265,6 @@ public:
 };
 
 
-class Equipment
-{
-private:
-    const int slots = 64;
-
-};
-
-
-
 
 class Character {
 private:
@@ -425,6 +420,54 @@ public:
 };
 
 
+class Enemy
+{
+public:
+    string enemy_name;
+    int level;
+    int health;
+    int physical_damage;
+    int magic_damage;
+    int fire_damage;
+    int bleeding_damage;
+    int lightning_damage;
+    int poison_damage;
+    int ice_damage;
+    Weapon* weapon;
+    Leggins* leggins;
+    Boots* boots;
+    int experience;
+    EnemyType type;
+
+    Enemy(string name, EnemyType t, int lvl, int hp, int pd, int md, int fd, int bd, int ld, int pod, int id)
+        : enemy_name(name), level(lvl), health(hp), physical_damage(pd), magic_damage(md), fire_damage(fd), bleeding_damage(bd), lightning_damage(ld),poison_damage(pod) ,ice_damage(pod), type(t) {}
+
+    void displayEnemy()
+    {
+        cout << enemy_name << "| Type: ";
+        switch (type)
+        {
+        case COMMON: cout << "Common "; break;
+        case ELDER: cout << "Elder "; break;
+        case WAR_LORD: cout << "War lord "; break;
+        case TITAN: cout << "Titan "; break;
+        case ANCIENT: cout << "Ancient "; break;
+        case LEVIATHAN: cout << "Leviathan "; break;
+        default: cout << "Unknown "; break;
+        }
+        cout << "Level: " << level << "\n";
+        cout << "Health: " << health << "\n";
+        cout << "Physical Damage: " << physical_damage << "\n";
+        cout << "Magic Damage: " << magic_damage << "\n";
+        cout << "Fire Damage: " << fire_damage << "\n";
+        cout << "Bleeding Damage: " << bleeding_damage << "\n";
+        cout << "Lightning Damage: " << lightning_damage << "\n";
+        cout << "Poison Damage: " << poison_damage << "\n";
+        cout << "Ice Damage: " << ice_damage << "\n";
+    }
+};
+
+
 
 int main()
 {
@@ -462,6 +505,14 @@ int main()
     Leggins shadowsLeggins("Shadow's leggins", MEDIUM2, 15, 10, 25, 15, 17, 8, 9);
     Boots shadowsBoots("Shadow's boots", MEDIUM4, 8, 5, 10, 12, 13, 9, 7);
 
+
+    Enemy Wolf("Wolf", COMMON, 1, 7, 6,0,0,8,0,0,0);
+    Enemy Rabbit("Rabbit", COMMON, 1, 4,4,0,0,7,0,0,0);
+    Enemy Bear("Bear", COMMON,1,10,8,0,0,13,0,0,0);
+    Enemy Tiger("Tiger", COMMON, 1,7,7,0,0,11,0,0,0);
+    Enemy Lion("Lion", COMMON, 1,8,7,0,0,12,0,0,0);
+    Enemy Snake("Snake", COMMON, 1,3,4,0,0,3,0,9,0);
+    Enemy Spider("Spider", COMMON,1,3,4,0,0,5,0,12,0);
 
     hero1.equipWeapon(&sword);
     hero2.equipWeapon(&wand);
