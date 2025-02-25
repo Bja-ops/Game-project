@@ -521,6 +521,11 @@ int main()
     Enemy Ogre("Ogre", COMMON, 1,7,7,0,0,0,0,5,4);
     Enemy Orc("Ork", COMMON, 1,8,9,4,3,5,4,1,0);
 
+    Enemy Angel("Angel", ELDER, 14,18,24,27,0,0,15,0,0);
+    Enemy Demon("Demon", ELDER, 14,19,20,14,28,14,9,0,0);
+    Enemy Devil("Devil", ELDER, 16,15,14,16,28,0,0,0,0);
+    Enemy Dark_angel("Dark angel", ELDER, 15,18,14,26,29,18,20,0,0);
+
     hero1.equipWeapon(&sword);
     hero2.equipWeapon(&wand);
     hero3.equipWeapon(&axe);
