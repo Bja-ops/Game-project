@@ -513,6 +513,13 @@ int main()
     Enemy Lion("Lion", COMMON, 1,8,7,0,0,12,0,0,0);
     Enemy Snake("Snake", COMMON, 1,3,4,0,0,3,0,9,0);
     Enemy Spider("Spider", COMMON,1,3,4,0,0,5,0,12,0);
+    Enemy Shark("Shark", COMMON, 1, 6,7,0,0,14,0,0,0);
+    Enemy Goblin("Goblin", COMMON, 1, 5,6,5,0,4,0,0,0);
+    Enemy Dark_goblin("Dark goblin", COMMON, 1,10,8,9,7,3,4,4,0);
+    Enemy Knight("Knight", COMMON, 1,5,7,0,0,8,0,0,0);
+    Enemy Dark_knight("Dark knight", COMMON, 1,10,9,7,4,6,3,0,0);
+    Enemy Ogre("Ogre", COMMON, 1,7,7,0,0,0,0,5,4);
+    Enemy Orc("Ork", COMMON, 1,8,9,4,3,5,4,1,0);
 
     hero1.equipWeapon(&sword);
     hero2.equipWeapon(&wand);
